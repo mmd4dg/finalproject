@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-
 	include ItemsHelper
+	before_action :authenticate_user!
+	before_filter :load_user
 
 	def index
-		@user = User.find(params[:user_id])
-		@items = Item.all.order(:expiration)
+		@items = @user.present? ? @user.items : Item.all.order(:location, :expiration)
 	end
 
 	def new
@@ -43,7 +43,13 @@ class ItemsController < ApplicationController
 	#end
 
 	def claim
-		update_attribute(:claimed, true)
+		@item = Item.find(params[:id])
+		@item.update_attribute(:claimed, true)
+		redirect_to items_path
+	end
+
+	def load_user
+		@user= User.find(params[:user_id]) if params[:user_id].present?
 	end
 
 	private

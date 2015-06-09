@@ -1,5 +1,5 @@
 module ItemsHelper
-	def can_add_item?(item)
-		item.user == giver 
+	def can_add_item?
+		current_user.giver == true
 	end
 end

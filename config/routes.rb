@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
 
+
+  
+
+  resources :items, only: [:index]
   resources :users do
     resources :items do
       member do
@@ -9,14 +13,16 @@ Rails.application.routes.draw do
     end
   end
 
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'welcome#index'
+    authenticated :user do
+    root to: 'items#index', as: :authenticated_root
+  end
 
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
+  root to: 'welcome#index'#   get 'products/:id' => 'catalog#view'
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
