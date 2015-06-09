@@ -22,11 +22,11 @@ class ItemsController < ApplicationController
 	end
 
 	def edit
-		@item = Item.find(params[:name])
+		@item = Item.find(params[:id])
 	end
 
 	def update
-		@item = current_user.items.find(params[:name])
+		@item = current_user.items.find(params[:id])
 		if @item.update(item_params)
 			redirect_to user_items_path
 		else
@@ -50,6 +50,6 @@ class ItemsController < ApplicationController
 	
 
 	def item_params
-		params.require(:item).permit(:name, :quantity, :expiration)
+		params.require(:item).permit(:name, :quantity, :expiration, :location)
 	end
 end
