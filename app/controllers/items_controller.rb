@@ -43,7 +43,9 @@ class ItemsController < ApplicationController
 	#end
 
 	def claim
-		update_attribute(:claimed, true)
+		@item = Item.find(params[:id])
+		@item.update_attribute(:claimed, true)
+		redirect_to items_path
 	end
 
 	def load_user
