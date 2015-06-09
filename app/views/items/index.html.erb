@@ -1,20 +1,30 @@
 <h1> Inventory </h1>
 
 <table>
-<% @user.items.each do |item| %>
+<% @items.each do |item| %>
 	<tr>
 		<td><%= item.name %>
 		</td>
 		<td><%= item.quantity %>
 		</td>
+		<td><%= item.expiration %>
+		</td>
+		<td><%= item.location %>
 
-		<td><%= if current_user.giver == false
-			if item.claimed
-				Claimed
-			else link_to "Claim"
-				claim_user_item_path(@user, item) 
-			end 
-			end%>
+		<td>
+			<% if current_user.giver == false %>
+				<% if item.claimed %>
+					Claimed
+				<% else %>
+					<%= link_to "Claim", claim_user_item_path(item.user, item) %>
+				<% end %> 
+			<% end %>
 		</td>
 	</tr>
+
+<% end %>
+
+
+<% if can_add_item? %>
+	<%= link_to "Add Item", new_user_item_path(current_user, @item)%>
 <% end %>
