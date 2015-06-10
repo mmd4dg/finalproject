@@ -34,13 +34,14 @@ class ItemsController < ApplicationController
 		end
 	end
 
-	#def destroy
-		#@item = current_user.items.find(params[:name])
+	def destroy
+		@item = current_user.items.find(params[:name])
+		@item.destroy
 		#if Date.today == item.expiration
 			#@item.destroy
-			#redirect_to user_items_path
+		redirect_to user_items_path
 		#end
-	#end
+	end
 
 	def claim
 		@item = Item.find(params[:id])

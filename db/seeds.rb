@@ -7,3 +7,4 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 restaurant1 = User.create(:email => "hudsons@gmail.com", :password => "password", :password_confirmation => "password")
+taker1 = User.create(:email => "123@gmail.com", :password => "password", :password_confirmation => "password", :giver => false)

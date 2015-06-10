@@ -7,9 +7,11 @@
 		</td>
 		<td><%= item.quantity %>
 		</td>
-		<td><%= item.expiration %>
+		<td><%= item.expiration%>
 		</td>
 		<td><%= item.location %>
+
+
 
 		<td>
 			<% if current_user.giver == false %>
@@ -18,6 +20,9 @@
 				<% else %>
 					<%= link_to "Claim", claim_user_item_path(item.user, item) %>
 				<% end %> 
+			<% else %>
+				<%= button_to 'Delete Item'
+                %>
 			<% end %>
 		</td>
 	</tr>
