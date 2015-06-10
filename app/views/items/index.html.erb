@@ -7,7 +7,7 @@
 		</td>
 		<td><%= item.quantity %>
 		</td>
-		<td><%= item.expiration%>
+		<td><%= item.expiration.strftime('%e %b %Y')%>
 		</td>
 		<td><%= item.location %>
 
@@ -21,7 +21,10 @@
 					<%= link_to "Claim", claim_user_item_path(item.user, item) %>
 				<% end %> 
 			<% else %>
-				<%= button_to 'Delete Item'
+				<%= button_to 'Delete Item', user_item_path(item.user, item),
+				method: :delete, data: {
+					confirm: "Are you sure?"
+				} 
                 %>
 			<% end %>
 		</td>

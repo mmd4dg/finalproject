@@ -35,11 +35,11 @@ class ItemsController < ApplicationController
 	end
 
 	def destroy
-		@item = current_user.items.find(params[:name])
+		@item = current_user.items.find(params[:id])
 		@item.destroy
 		#if Date.today == item.expiration
 			#@item.destroy
-		redirect_to user_items_path
+		redirect_to authenticated_root_path
 		#end
 	end
 
