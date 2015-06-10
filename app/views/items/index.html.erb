@@ -21,10 +21,8 @@
 					<%= link_to "Claim", claim_user_item_path(item.user, item) %>
 				<% end %> 
 			<% else %>
-				<%= button_to 'Delete Item', user_item_path(item.user, item),
-				method: :delete, data: {
-					confirm: "Are you sure?"
-				} 
+				<%= button_to 'Delete Item', user_item_path(item.user, item), method: :delete, data: { 
+	 					confirm: "Are you sure?" }
                 %>
 			<% end %>
 		</td>
