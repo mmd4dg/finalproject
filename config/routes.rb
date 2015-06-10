@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   
 
-  resources :items, only: [:index]
+  resources :items, only: [:index] do
+      delete :destroy
+    end
   resources :users do
     resources :items do
       member do
