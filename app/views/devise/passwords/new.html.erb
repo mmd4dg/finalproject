@@ -1,4 +1,38 @@
-<h2>Forgot your password?</h2>
+<style>
+body {
+  padding: 75px;
+  background:  url("https://whisk.com/wp-content/uploads/2014/12/dark-wood-and-vegetables.jpg");
+  background-size: cover;
+}
+div {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+.field input{
+  background: black;
+  border: 0;
+}
+
+.actions {
+  color: #f05f40;
+}
+</style>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand page-scroll" href="#page-top">Forgot your password?</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+    
+      <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+<body>
 
 <%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
   <%= devise_error_messages! %>
@@ -7,10 +41,13 @@
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
   </div>
+  <br>
 
   <div class="actions">
     <%= f.submit "Send me reset password instructions" %>
   </div>
+  <br>
 <% end %>
+</body>
 
 <%= render "devise/shared/links" %>
