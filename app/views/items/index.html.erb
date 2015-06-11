@@ -2,10 +2,12 @@
 
 <h1> Inventory </h1>
 <div class='row'>
-	<div class="col-md-6">
+	<div class="col-md-8">
 	<table>
 	<% @items.each do |item| %>
 		<tr>
+			<td> <%= item.restaurant %>
+			</td>
 			<td> <%= item.name %>
 			</td>
 			<td><%= item.quantity %>
@@ -14,9 +16,6 @@
 			</td>
 			<td><%= item.location %>
 			</td>
-
-
-
 			<td>
 				<% if current_user.giver == false %>
 					<% if item.claimed %>
@@ -31,12 +30,11 @@
 				<% end %>
 			</td>
 		</tr>
-
 	<% end %>
 	</div>
 
 <% if current_user.giver == false %>
-	<div class="pull right" align = "left">
+	<div class="col-md-4" align = "left">
 		<div id='map'></div>
 	</div>
 
@@ -68,9 +66,6 @@
 		        'marker-color': 'ff8888'
 		    })
 		}).bindPopup("Knead").addTo(map);
-
-
-
 		</script>
 
 </div>
