@@ -1,8 +1,50 @@
 
+<style>
+body {
+  padding: 75px;
+  background:  url("https://whisk.com/wp-content/uploads/2014/12/dark-wood-and-vegetables.jpg");
+  background-size: cover;
+}
+div {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+  font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+h3 {
+    color: white;
+}
+.actions {
+  color: #f05f40;
+}
+</style>
 
-<h1> Inventory </h1>
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand page-scroll" href="#page-top">Inventory</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+          <li>
+                  <a class="page-scroll" href="http://localhost:3000/users/edit">Edit Profile</a>
+              </li>
+          <li>
+                  <a class="page-scroll" href="http://localhost:3000">Logout</a>
+              </li>
+          </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+
+<body>
 <div class='row'>
-	<div class="col-md-8">
+	<div class="col-md-6" align: "left">
 	<table>
 	<% @items.each do |item| %>
 		<tr>
@@ -31,10 +73,11 @@
 			</td>
 		</tr>
 	<% end %>
+	</table>
 	</div>
 
 <% if current_user.giver == false %>
-	<div class="col-md-4" align = "left">
+	<div class="col-md-6" align = "right">
 		<div id='map'></div>
 	</div>
 
@@ -79,3 +122,4 @@
 <% if can_add_item? %>
 	<%= link_to "Add Item", new_user_item_path(current_user, @item)%>
 <% end %>
+<body>
