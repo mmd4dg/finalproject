@@ -8,7 +8,7 @@ body {
 div {
   text-align: center;
   color: white;
-  font-size: 20px;
+  font-size: 18px;
   text-transform: uppercase;
   font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
 }
@@ -17,6 +17,10 @@ h3 {
 }
 .actions {
   color: #f05f40;
+}
+
+script {
+	color: black;
 }
 </style>
 
@@ -33,8 +37,8 @@ h3 {
                   <a class="page-scroll" href="http://localhost:3000/users/edit">Edit Profile</a>
               </li>
           <li>
-                  <a class="page-scroll" href="http://localhost:3000">Logout</a>
-              </li>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+            </li>
           </ul>
       </div>
       <!-- /.navbar-collapse -->
@@ -54,7 +58,7 @@ h3 {
 			</td>
 			<td><%= item.quantity %>
 			</td>
-			<td><%= item.expiration.strftime('%e %b %Y')%>
+			<td><%= item.expiration.strftime('%m/%d/%y')%>
 			</td>
 			<td><%= item.location %>
 			</td>
@@ -87,28 +91,28 @@ h3 {
 		//     .setView([40, -74.50], 9);
 		L.mapbox.accessToken = 'pk.eyJ1Ijoib3NjYXJ3MyIsImEiOiIxZDQ4MTE2NGFlYWJjNTY1ODZhMWJmNzQ3OTUwZGE4MyJ9.tlyn20Cn-ecT9wwQYHtpzA';
 		var map = L.mapbox.map('map', 'mapbox.streets')
-		    .setView([-33.9269427,18.413096], 16);
+		    .setView([-33.9269427,18.413096], 12);
 
 		   var fixedMarker1 = L.marker(new L.LatLng(-33.93035,18.41077), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Hudson's").addTo(map);
+		}).bindPopup("Hudson's 73 Kloof St").addTo(map);
 
 		     var fixedMarker2 = L.marker(new L.LatLng(-33.926054,18.415115), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Lola's").addTo(map);
+		}).bindPopup("Lola's 228 Long St").addTo(map);
 
 		     var fixedMarker3 = L.marker(new L.LatLng(-33.929485,18.411107), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Knead").addTo(map);
+		}).bindPopup("Knead 65 Kloof St").addTo(map);
 
 		  	var myLocations = L.mapbox.featureLayer()
 		  	.loadURL('/items.json')
