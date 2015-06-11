@@ -31,6 +31,8 @@ gem 'devise'
 gem 'twitter-bootstrap-rails'
 # Font-awesome
 gem "font-awesome-rails"
+
+gem 'geocoder'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

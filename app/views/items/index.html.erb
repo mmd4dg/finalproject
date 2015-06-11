@@ -1,35 +1,80 @@
+
+
 <h1> Inventory </h1>
+<div class='row'>
+	<div class="col-md-6">
+	<table>
+	<% @items.each do |item| %>
+		<tr>
+			<td> <%= item.name %>
+			</td>
+			<td><%= item.quantity %>
+			</td>
+			<td><%= item.expiration.strftime('%e %b %Y')%>
+			</td>
+			<td><%= item.location %>
+			</td>
 
-<table>
-<% @items.each do |item| %>
-	<tr>
-		<td><%= item.name %>
-		</td>
-		<td><%= item.quantity %>
-		</td>
-		<td><%= item.expiration.strftime('%e %b %Y')%>
-		</td>
-		<td><%= item.location %>
 
 
-
-		<td>
-			<% if current_user.giver == false %>
-				<% if item.claimed %>
-					Claimed
+			<td>
+				<% if current_user.giver == false %>
+					<% if item.claimed %>
+						Claimed
+					<% else %>
+						<%= link_to "Claim", claim_user_item_path(item.user, item) %>
+					<% end %> 
 				<% else %>
-					<%= link_to "Claim", claim_user_item_path(item.user, item) %>
-				<% end %> 
-			<% else %>
-				<%= button_to 'Delete Item', user_item_path(item.user, item), method: :delete, data: { 
-	 					confirm: "Are you sure?" }
-                %>
-			<% end %>
-		</td>
-	</tr>
+					<%= button_to 'Delete Item', user_item_path(item.user, item), method: :delete, data: { 
+		 					confirm: "Are you sure?" }
+	                %>
+				<% end %>
+			</td>
+		</tr>
 
+	<% end %>
+	</div>
+
+<% if current_user.giver == false %>
+	<div class="pull right" align = "left">
+		<div id='map'></div>
+	</div>
+
+		<script>
+		// L.mapbox.accessToken = 'pk.eyJ1Ijoib3NjYXJ3MyIsImEiOiIxZDQ4MTE2NGFlYWJjNTY1ODZhMWJmNzQ3OTUwZGE4MyJ9.tlyn20Cn-ecT9wwQYHtpzA';
+		// var map = L.mapbox.map('map', 'mapbox.streets')
+		//     .setView([40, -74.50], 9);
+		L.mapbox.accessToken = 'pk.eyJ1Ijoib3NjYXJ3MyIsImEiOiIxZDQ4MTE2NGFlYWJjNTY1ODZhMWJmNzQ3OTUwZGE4MyJ9.tlyn20Cn-ecT9wwQYHtpzA';
+		var map = L.mapbox.map('map', 'mapbox.streets')
+		    .setView([-33.9269427,18.413096], 16);
+
+		   var fixedMarker1 = L.marker(new L.LatLng(-33.93035,18.41077), {
+		    icon: L.mapbox.marker.icon({
+		    	"marker-symbol": "embassy",
+		        'marker-color': 'ff8888'
+		    })
+		}).bindPopup("Hudson's").addTo(map);
+
+		     var fixedMarker2 = L.marker(new L.LatLng(-33.926054,18.415115), {
+		    icon: L.mapbox.marker.icon({
+		    	"marker-symbol": "embassy",
+		        'marker-color': 'ff8888'
+		    })
+		}).bindPopup("Lola's").addTo(map);
+
+		     var fixedMarker3 = L.marker(new L.LatLng(-33.929485,18.411107), {
+		    icon: L.mapbox.marker.icon({
+		    	"marker-symbol": "embassy",
+		        'marker-color': 'ff8888'
+		    })
+		}).bindPopup("Knead").addTo(map);
+
+
+
+		</script>
+
+</div>
 <% end %>
-
 
 <% if can_add_item? %>
 	<%= link_to "Add Item", new_user_item_path(current_user, @item)%>
