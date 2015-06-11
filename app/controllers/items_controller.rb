@@ -5,6 +5,25 @@ class ItemsController < ApplicationController
 
 	def index
 		@items = @user.present? ? @user.items : Item.all.order(:location, :expiration)
+		@geojson = Array.new
+		@items.each do |item|
+			@geojson << {
+				type: 'Feature',
+				geometry: {
+					type: 'Point',
+					coordinates: [item.longitude, item.latitude]
+				},
+				properties: {
+					title: item.restaurant,
+					"marker-symbol": "embassy",
+		        	'marker-color': 'ff8888'
+				}
+			}
+		end
+		respond_to do |format|
+			format.html
+			format.json { render json: @geojson}
+		end
 	end
 
 	def new

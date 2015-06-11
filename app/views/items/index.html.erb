@@ -66,6 +66,11 @@
 		        'marker-color': 'ff8888'
 		    })
 		}).bindPopup("Knead").addTo(map);
+
+		  	var myLocations = L.mapbox.featureLayer()
+		  	.loadURL('/items.json')
+		  	.addTo(map)
+
 		</script>
 
 </div>
