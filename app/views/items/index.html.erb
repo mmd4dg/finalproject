@@ -52,17 +52,15 @@ script {
 	<table>
 	<% @items.each do |item| %>
 		<tr>
-			<td> <%= item.restaurant %>
+			<td width="20%"> <%= item.restaurant %>
 			</td>
-			<td> <%= item.name %>
+			<td width="20%"> <%= item.name %>
 			</td>
-			<td><%= item.quantity %>
+			<td width="20%"><%= item.quantity %>
 			</td>
-			<td><%= item.expiration.strftime('%m/%d/%y')%>
+			<td width="20%"><%= item.expiration.strftime('%m/%d/%y')%>
 			</td>
-			<td><%= item.location %>
-			</td>
-			<td>
+			<td width="20%">
 				<% if current_user.giver == false %>
 					<% if item.claimed %>
 						Claimed
@@ -70,7 +68,7 @@ script {
 						<%= link_to "Claim", claim_user_item_path(item.user, item) %>
 					<% end %> 
 				<% else %>
-					<%= button_to 'Delete Item', user_item_path(item.user, item), method: :delete, data: { 
+					<%= link_to image_tag("Delete.png", size: "24"), user_item_path(item.user, item), method: :delete, data: { 
 		 					confirm: "Are you sure?" }
 	                %>
 				<% end %>
