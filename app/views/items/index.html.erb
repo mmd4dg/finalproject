@@ -1,8 +1,54 @@
 
+<style>
+body {
+  padding: 75px;
+  background:  url("https://whisk.com/wp-content/uploads/2014/12/dark-wood-and-vegetables.jpg");
+  background-size: cover;
+}
+div {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  text-transform: uppercase;
+  font-family: 'Open Sans','Helvetica Neue',Arial,sans-serif;
+}
+h3 {
+    color: white;
+}
+.actions {
+  color: #f05f40;
+}
 
-<h1> Inventory </h1>
+script {
+	color: black;
+}
+</style>
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+          <a class="navbar-brand page-scroll" href="#page-top">Inventory</a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+          <li>
+                  <a class="page-scroll" href="http://localhost:3000/users/edit">Edit Profile</a>
+              </li>
+          <li>
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+            </li>
+          </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+
+<body>
 <div class='row'>
-	<div class="col-md-8">
+	<div class="col-md-6" align: "left">
 	<table>
 	<% @items.each do |item| %>
 		<tr>
@@ -12,7 +58,7 @@
 			</td>
 			<td><%= item.quantity %>
 			</td>
-			<td><%= item.expiration.strftime('%e %b %Y')%>
+			<td><%= item.expiration.strftime('%m/%d/%y')%>
 			</td>
 			<td><%= item.location %>
 			</td>
@@ -31,10 +77,11 @@
 			</td>
 		</tr>
 	<% end %>
+	</table>
 	</div>
 
 <% if current_user.giver == false %>
-	<div class="col-md-4" align = "left">
+	<div class="col-md-6" align = "right">
 		<div id='map'></div>
 	</div>
 
@@ -44,28 +91,28 @@
 		//     .setView([40, -74.50], 9);
 		L.mapbox.accessToken = 'pk.eyJ1Ijoib3NjYXJ3MyIsImEiOiIxZDQ4MTE2NGFlYWJjNTY1ODZhMWJmNzQ3OTUwZGE4MyJ9.tlyn20Cn-ecT9wwQYHtpzA';
 		var map = L.mapbox.map('map', 'mapbox.streets')
-		    .setView([-33.9269427,18.413096], 16);
+		    .setView([-33.9269427,18.413096], 12);
 
 		   var fixedMarker1 = L.marker(new L.LatLng(-33.93035,18.41077), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Hudson's").addTo(map);
+		}).bindPopup("Hudson's 73 Kloof St").addTo(map);
 
 		     var fixedMarker2 = L.marker(new L.LatLng(-33.926054,18.415115), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Lola's").addTo(map);
+		}).bindPopup("Lola's 228 Long St").addTo(map);
 
 		     var fixedMarker3 = L.marker(new L.LatLng(-33.929485,18.411107), {
 		    icon: L.mapbox.marker.icon({
 		    	"marker-symbol": "embassy",
 		        'marker-color': 'ff8888'
 		    })
-		}).bindPopup("Knead").addTo(map);
+		}).bindPopup("Knead 65 Kloof St").addTo(map);
 
 		  	var myLocations = L.mapbox.featureLayer()
 		  	.loadURL('/items.json')
@@ -79,3 +126,4 @@
 <% if can_add_item? %>
 	<%= link_to "Add Item", new_user_item_path(current_user, @item)%>
 <% end %>
+<body>
